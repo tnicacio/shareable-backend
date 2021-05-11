@@ -16,16 +16,23 @@ public class UserKnowledge {
 	public UserKnowledge() {};
 	
 	public UserKnowledge(User user, Knowledge knowledge) {
-		id.setUser(user);
-		id.setKnowledge(knowledge);
+		setUser(user);
+		setKnowledge(knowledge);
 	}
 
 	public User getUser() {
 		return id.getUser();
 	}
 	
+	public void setUser(User user) {
+		id.setUser(user);
+	}
+	
 	public Knowledge getKnowledge() {
 		return id.getKnowledge();
 	}
 	
+	public void setKnowledge(Knowledge knowledge) {
+		id.setKnowledge(knowledge);
+	}
 }

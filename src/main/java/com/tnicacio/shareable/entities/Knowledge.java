@@ -1,7 +1,7 @@
 package com.tnicacio.shareable.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +20,7 @@ public class Knowledge {
 	private String name;
 	
 	@OneToMany(mappedBy = "id.knowledge")
-	private Set<UserKnowledge> users = new HashSet<>();
+	private List<UserKnowledge> users = new ArrayList<>();
 	
 	public Knowledge() {}
 
@@ -46,7 +46,7 @@ public class Knowledge {
 		this.name = name;
 	}
 	
-	public Set<UserKnowledge> getUsers() {
+	public List<UserKnowledge> getUsers() {
 		return users;
 	}
 
