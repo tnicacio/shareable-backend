@@ -26,9 +26,6 @@ public class SharedSession {
 	
 	private Integer status;
 	
-//	@ManyToMany(mappedBy = "id.sharedsession")
-//	private List<UserSession> users = new ArrayList<>();
-	
 	public SharedSession() {}
 
 	public SharedSession(Long id, Instant createdAt, Instant updatedAt, SharedSessionStatus status) {

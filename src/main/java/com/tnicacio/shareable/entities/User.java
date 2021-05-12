@@ -42,9 +42,6 @@ public class User {
 	@OneToMany(mappedBy = "id.user")
 	private List<UserKnowledge> knowledges = new ArrayList<>();
 
-//	@OneToMany(mappedBy = "id.user")
-//	private List<UserSession> sessions = new ArrayList<>();
-
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "tb_user_session", 
 		joinColumns = @JoinColumn(name = "user_id"),
