@@ -33,9 +33,29 @@ public class UserService implements UserDetailsService {
 	}
 
 	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(Pageable pageable) {
+	public Page<UserDTO> findAll(Pageable pageable) {
 		Page<User> list = repository.findAll(pageable);
 		return list.map(user -> new UserDTO(user));
+	}
+
+	public UserDTO findById(Long existingId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public UserDTO insert(UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public UserDTO update(Long existingId, UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void delete(Long existingId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -48,5 +68,4 @@ public class UserService implements UserDetailsService {
 		logger.info("User found: " + username);
 		return user;
 	}
-
 }
