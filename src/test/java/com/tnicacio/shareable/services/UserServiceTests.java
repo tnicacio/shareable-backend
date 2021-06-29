@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.tnicacio.shareable.dto.UserDTO;
@@ -33,6 +34,9 @@ public class UserServiceTests {
 	
 	@Mock
 	private UserRepository repository;
+	
+	@Mock
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	private long existingId;
 	private long nonExistingId;
