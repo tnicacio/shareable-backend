@@ -4,40 +4,40 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tnicacio.shareable.entities.enums.SharedSessionStatus;
 
 @Entity
-@Table(name = "tb_shared_session")
-public class SharedSession {
+@Table(name = "tb_session")
+public class Session {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
 	
 	private Integer status;
 	
 	@ManyToMany(mappedBy = "sessions")
-	private List<User> users = new ArrayList<>();
+	private final List<User> users = new ArrayList<>();
 	
-	public SharedSession() {}
+	public Session() {}
 
-	public SharedSession(Long id, Instant createdAt, Instant updatedAt, SharedSessionStatus status) {
+	public Session(Long id, SharedSessionStatus status) {
 		this.id = id;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
 		setStatus(status);
 	}
 
@@ -53,17 +53,10 @@ public class SharedSession {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Instant createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	public Instant getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Instant updatedAt) {
-		this.updatedAt = updatedAt;
-	}
 	
 	public SharedSessionStatus getStatus() {
 		return SharedSessionStatus.valueOf(status);
@@ -75,6 +68,19 @@ public class SharedSession {
 		}
 	}
 	
+	public List<User> getUsers() {
+		return users;
+	}
+
+	@PrePersist
+	public void prePersist() {
+		createdAt = Instant.now();
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		updatedAt = Instant.now();
+	}
 
 	@Override
 	public int hashCode() {
@@ -92,7 +98,7 @@ public class SharedSession {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SharedSession other = (SharedSession) obj;
+		Session other = (Session) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

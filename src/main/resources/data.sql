@@ -1,9 +1,18 @@
 insert into tb_user (name, password, email, description, created_at, updated_at, inactivated_at, is_active) values 
-('Tiago', '123456','tiago@email.com', 'descricao do perfil', now(), now(), now(), true),
-('Mariazinha', '1123456','mariazinha@email.com', 'descricao dela', now(), now(), now(), true),
-('João', '321412','joao@email.com', 'joão do perfil', now(), now(), now(), true),
-('Aline', '323232','line@email.com', 'line linda', now(), now(), now(), true)
+('Tiago', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','tiago@email.com', 'descricao do perfil', now(), now(), null, true),
+('Mariazinha', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','mariazinha@email.com', 'descricao dela', now(), now(), null, true),
+('João', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','joao@email.com', 'joão do perfil', now(), now(), now(), false),
+('Aline', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','line@email.com', 'line linda', now(), now(), null, true)
 ;
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 2);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (4, 1);
 
 insert into tb_knowledge(name) values
 ('empinar pipa'),
@@ -26,7 +35,7 @@ insert into tb_user_knowledge (user_id, knowledge_id) values
 (3,6)
 ;
 
-insert into tb_shared_session (created_at, updated_at, status) values
+insert into tb_session (created_at, updated_at, status) values
 (now(), now(), 2),
 (now(), now(), 3),
 (now(), now(), 1)

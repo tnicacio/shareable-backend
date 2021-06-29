@@ -1,32 +1,28 @@
-package com.tnicacio.shareable.entities;
+package com.tnicacio.shareable.dto;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import com.tnicacio.shareable.entities.Knowledge;
 
-@Entity
-@Table(name = "tb_knowledge")
-public class Knowledge {
+public class KnowledgeDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	
-	@ManyToMany(mappedBy = "knowledges")
-	private final Set<User> users = new HashSet<>();
+	private final Set<UserDTO> users = new HashSet<>();
 	
-	public Knowledge() {}
+	public KnowledgeDTO() {}
 
-	public Knowledge(Long id, String name) {
+	public KnowledgeDTO(Long id, String name) {
 		this.id = id;
 		this.name = name;
+	}
+	
+	public KnowledgeDTO(Knowledge entity) {
+		id = entity.getId();
+		name = entity.getName();
+		entity.getUsers().forEach(user -> this.users.add(new UserDTO(user)));
 	}
 
 	public Long getId() {
@@ -44,8 +40,8 @@ public class Knowledge {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public Set<User> getUsers() {
+
+	public Set<UserDTO> getUsers() {
 		return users;
 	}
 
@@ -65,7 +61,7 @@ public class Knowledge {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Knowledge other = (Knowledge) obj;
+		KnowledgeDTO other = (KnowledgeDTO) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
