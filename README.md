@@ -86,7 +86,7 @@ Atualiza os dados da função de id informado
 ### [DELETE] /roles/:id
 Exclui a função de id informado
 
-## :computer: Tecnologias utilizadas
+# :computer: Tecnologias utilizadas
 - SpringBoot
 - PostgreSQL
 - JUnit
