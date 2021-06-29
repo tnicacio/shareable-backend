@@ -11,7 +11,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import com.tnicacio.shareable.entities.enums.SharedSessionStatus;
+import com.tnicacio.shareable.entities.enums.SessionStatus;
 
 @Entity
 @Table(name = "tb_session")
@@ -30,7 +30,7 @@ public class Session {
 	
 	public Session() {}
 
-	public Session(Long id, SharedSessionStatus status) {
+	public Session(Long id, SessionStatus status) {
 		this.id = id;
 		setStatus(status);
 	}
@@ -59,11 +59,11 @@ public class Session {
 		this.updatedAt = updatedAt;
 	}
 	
-	public SharedSessionStatus getStatus() {
-		return SharedSessionStatus.valueOf(status);
+	public SessionStatus getStatus() {
+		return SessionStatus.valueOf(status);
 	}
 	
-	public void setStatus(SharedSessionStatus status) {
+	public void setStatus(SessionStatus status) {
 		if (status != null) {
 			this.status = status.getCode();
 		}

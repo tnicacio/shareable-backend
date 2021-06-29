@@ -1,6 +1,6 @@
 package com.tnicacio.shareable.entities.enums;
 
-public enum SharedSessionStatus {
+public enum SessionStatus {
 	
 	ONGOING(1),
 	FINISHED(2),
@@ -8,7 +8,7 @@ public enum SharedSessionStatus {
 
 	private int code;
 	
-	private SharedSessionStatus(int code) {
+	private SessionStatus(int code) {
 		this.code = code;
 	}
 	
@@ -16,8 +16,8 @@ public enum SharedSessionStatus {
 		return code;
 	}
 	
-	public static SharedSessionStatus valueOf(int code) {
-		for (SharedSessionStatus value : SharedSessionStatus.values()) {
+	public static SessionStatus valueOf(int code) {
+		for (SessionStatus value : SessionStatus.values()) {
 			if (value.getCode() == code) {
 				return value;
 			}

@@ -12,51 +12,50 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tnicacio.shareable.dto.SessionDTO;
-import com.tnicacio.shareable.entities.Session;
-import com.tnicacio.shareable.entities.enums.SessionStatus;
-import com.tnicacio.shareable.repositories.SessionRepository;
+import com.tnicacio.shareable.dto.RoleDTO;
+import com.tnicacio.shareable.entities.Role;
+import com.tnicacio.shareable.repositories.RoleRepository;
 import com.tnicacio.shareable.services.exceptions.DatabaseException;
 import com.tnicacio.shareable.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class SessionService {
+public class RoleService {
 
-	private SessionRepository repository;
+	private RoleRepository repository;
 	
 	@Autowired
-	public SessionService(SessionRepository repository) {
+	public RoleService(RoleRepository repository) {
 		this.repository = repository;
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<SessionDTO> findAll(Pageable pageable) {
-		Page<Session> list = repository.findAll(pageable);
-		return list.map(session -> new SessionDTO(session));
+	public Page<RoleDTO> findAll(Pageable pageable) {
+		Page<Role> list = repository.findAll(pageable);
+		return list.map(role -> new RoleDTO(role));
 	}
 	
 	@Transactional(readOnly = true)
-	public SessionDTO findById(Long id) {
-		Optional<Session> optionalEntity = repository.findById(id);
-		Session entity = optionalEntity.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new SessionDTO(entity);
+	public RoleDTO findById(Long id) {
+		Optional<Role> optionalEntity = repository.findById(id);
+		Role entity = optionalEntity.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new RoleDTO(entity);
 	}
 
 	@Transactional
-	public SessionDTO insert(SessionDTO dto) {
-		Session entity = new Session();
+	public RoleDTO insert(RoleDTO dto) {
+		Role entity = new Role();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
-		return new SessionDTO(entity);
+		return new RoleDTO(entity);
 	}
 
 	@Transactional
-	public SessionDTO update(Long id, SessionDTO dto) {
+	public RoleDTO update(Long id, RoleDTO dto) {
 		try {
-			Session entity = repository.getOne(id);
+			Role entity = repository.getOne(id);
 			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
-			return new SessionDTO(entity);
+			return new RoleDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
@@ -72,7 +71,7 @@ public class SessionService {
 		}		
 	}
 	
-	private void copyDtoToEntity(SessionDTO dto, Session entity) {
-		entity.setStatus(SessionStatus.valueOf( dto.getStatus()));
+	private void copyDtoToEntity(RoleDTO dto, Role entity) {
+		entity.setAuthority(dto.getAuthority());
 	}
 }

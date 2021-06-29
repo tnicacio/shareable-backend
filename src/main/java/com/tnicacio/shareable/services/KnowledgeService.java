@@ -12,51 +12,50 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tnicacio.shareable.dto.SessionDTO;
-import com.tnicacio.shareable.entities.Session;
-import com.tnicacio.shareable.entities.enums.SessionStatus;
-import com.tnicacio.shareable.repositories.SessionRepository;
+import com.tnicacio.shareable.dto.KnowledgeDTO;
+import com.tnicacio.shareable.entities.Knowledge;
+import com.tnicacio.shareable.repositories.KnowledgeRepository;
 import com.tnicacio.shareable.services.exceptions.DatabaseException;
 import com.tnicacio.shareable.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class SessionService {
+public class KnowledgeService {
 
-	private SessionRepository repository;
+	private KnowledgeRepository repository;
 	
 	@Autowired
-	public SessionService(SessionRepository repository) {
+	public KnowledgeService(KnowledgeRepository repository) {
 		this.repository = repository;
 	}
 	
 	@Transactional(readOnly = true)
-	public Page<SessionDTO> findAll(Pageable pageable) {
-		Page<Session> list = repository.findAll(pageable);
-		return list.map(session -> new SessionDTO(session));
+	public Page<KnowledgeDTO> findAll(Pageable pageable) {
+		Page<Knowledge> list = repository.findAll(pageable);
+		return list.map(knowledge -> new KnowledgeDTO(knowledge));
 	}
 	
 	@Transactional(readOnly = true)
-	public SessionDTO findById(Long id) {
-		Optional<Session> optionalEntity = repository.findById(id);
-		Session entity = optionalEntity.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new SessionDTO(entity);
+	public KnowledgeDTO findById(Long id) {
+		Optional<Knowledge> optionalEntity = repository.findById(id);
+		Knowledge entity = optionalEntity.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new KnowledgeDTO(entity);
 	}
 
 	@Transactional
-	public SessionDTO insert(SessionDTO dto) {
-		Session entity = new Session();
+	public KnowledgeDTO insert(KnowledgeDTO dto) {
+		Knowledge entity = new Knowledge();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
-		return new SessionDTO(entity);
+		return new KnowledgeDTO(entity);
 	}
 
 	@Transactional
-	public SessionDTO update(Long id, SessionDTO dto) {
+	public KnowledgeDTO update(Long id, KnowledgeDTO dto) {
 		try {
-			Session entity = repository.getOne(id);
+			Knowledge entity = repository.getOne(id);
 			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
-			return new SessionDTO(entity);
+			return new KnowledgeDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
@@ -72,7 +71,7 @@ public class SessionService {
 		}		
 	}
 	
-	private void copyDtoToEntity(SessionDTO dto, Session entity) {
-		entity.setStatus(SessionStatus.valueOf( dto.getStatus()));
+	private void copyDtoToEntity(KnowledgeDTO dto, Knowledge entity) {
+		entity.setName(dto.getName());
 	}
 }

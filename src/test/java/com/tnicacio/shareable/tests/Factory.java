@@ -7,7 +7,7 @@ import com.tnicacio.shareable.entities.Knowledge;
 import com.tnicacio.shareable.entities.Role;
 import com.tnicacio.shareable.entities.Session;
 import com.tnicacio.shareable.entities.User;
-import com.tnicacio.shareable.entities.enums.SharedSessionStatus;
+import com.tnicacio.shareable.entities.enums.SessionStatus;
 
 public class Factory {
 	
@@ -40,7 +40,7 @@ public class Factory {
 	}
 	
 	public static Session createSession() {
-		return new Session(null, SharedSessionStatus.ONGOING);
+		return new Session(null, SessionStatus.ONGOING);
 	}
 	
 	public static Knowledge createKnowledge() {
