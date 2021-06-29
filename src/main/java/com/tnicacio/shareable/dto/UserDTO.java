@@ -20,6 +20,8 @@ public class UserDTO {
 	@Email(message = "Please insert a valid email")
 	private String email;
 	
+	private String image;
+	
 	@NotBlank(message = "Required Field")
 	private String password;
 	
@@ -36,11 +38,13 @@ public class UserDTO {
 	public UserDTO() {
 	}
 
-	public UserDTO(Long id, String name, String email, String password, String description, Instant createdAt,
+	public UserDTO(Long id, String name, String email, String image,
+			String password, String description, Instant createdAt,
 			Instant updatedAt, Instant inactivatedAt, Boolean isActive) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.image = image;
 		this.password = password;
 		this.description = description;
 		this.createdAt = createdAt;
@@ -52,7 +56,14 @@ public class UserDTO {
 	public UserDTO(User entity) {
 		id = entity.getId();
 		name = entity.getName();
+		image = entity.getImage();
 		email = entity.getEmail();
+		password = entity.getPassword();
+		description = entity.getDescription();
+		createdAt = entity.getCreatedAt();
+		updatedAt = entity.getUpdatedAt();
+		inactivatedAt = entity.getInactivatedAt();
+		isActive = entity.getIsActive();
 		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
 		entity.getKnowledges().forEach(knowledge -> this.knowledges.add(new KnowledgeDTO(knowledge)));
 		entity.getSessions().forEach(session -> this.sessions.add(new SessionDTO(session)));
@@ -80,6 +91,14 @@ public class UserDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getPassword() {

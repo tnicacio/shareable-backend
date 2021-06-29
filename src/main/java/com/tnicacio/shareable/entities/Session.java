@@ -1,15 +1,12 @@
 package com.tnicacio.shareable.entities;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -31,9 +28,6 @@ public class Session {
 	
 	private Integer status;
 	
-	@ManyToMany(mappedBy = "sessions")
-	private final List<User> users = new ArrayList<>();
-	
 	public Session() {}
 
 	public Session(Long id, SharedSessionStatus status) {
@@ -52,11 +46,18 @@ public class Session {
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
+	
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	public Instant getUpdatedAt() {
 		return updatedAt;
 	}
 
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 	
 	public SharedSessionStatus getStatus() {
 		return SharedSessionStatus.valueOf(status);
@@ -66,10 +67,6 @@ public class Session {
 		if (status != null) {
 			this.status = status.getCode();
 		}
-	}
-	
-	public List<User> getUsers() {
-		return users;
 	}
 
 	@PrePersist

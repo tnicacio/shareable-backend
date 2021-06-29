@@ -12,7 +12,7 @@ import com.tnicacio.shareable.entities.enums.SharedSessionStatus;
 public class Factory {
 	
 	public static User createUser() {
-		return new User(null, "John Doe", "jaydoe@email.com", "123456", "A great guy", Instant.now(), null, null, true);
+		return new User(null, "John Doe", "jaydoe@email.com", "image-url", "123456", "A great guy", Instant.now(), null, null, true);
 	}
 	
 	public static UserDTO createUserDTO() {

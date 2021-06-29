@@ -1,8 +1,6 @@
 package com.tnicacio.shareable.dto;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.tnicacio.shareable.entities.Session;
 
@@ -12,8 +10,6 @@ public class SessionDTO {
 	private Instant createdAt;
 	private Instant updatedAt;
 	private Integer status;
-	
-	private final List<UserDTO> users = new ArrayList<>();
 	
 	public SessionDTO() {}
 
@@ -29,7 +25,6 @@ public class SessionDTO {
 		createdAt = entity.getCreatedAt();
 		updatedAt = entity.getUpdatedAt();
 		status = entity.getStatus().getCode();
-		entity.getUsers().forEach(user -> this.users.add(new UserDTO(user)));
 	}
 	
 	public Long getId() {
@@ -64,10 +59,6 @@ public class SessionDTO {
 		this.status = status;
 	}
 
-	
-	public List<UserDTO> getUsers() {
-		return users;
-	}
 
 	@Override
 	public int hashCode() {

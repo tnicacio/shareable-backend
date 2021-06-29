@@ -1,16 +1,11 @@
 package com.tnicacio.shareable.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.tnicacio.shareable.entities.Knowledge;
 
 public class KnowledgeDTO {
 
 	private Long id;
 	private String name;
-	
-	private final Set<UserDTO> users = new HashSet<>();
 	
 	public KnowledgeDTO() {}
 
@@ -22,7 +17,6 @@ public class KnowledgeDTO {
 	public KnowledgeDTO(Knowledge entity) {
 		id = entity.getId();
 		name = entity.getName();
-		entity.getUsers().forEach(user -> this.users.add(new UserDTO(user)));
 	}
 
 	public Long getId() {
@@ -39,10 +33,6 @@ public class KnowledgeDTO {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<UserDTO> getUsers() {
-		return users;
 	}
 
 	@Override

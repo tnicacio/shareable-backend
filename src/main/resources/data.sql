@@ -1,11 +1,11 @@
-insert into tb_user (name, password, email, description, created_at, updated_at, inactivated_at, is_active) values 
-('Tiago', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','tiago@email.com', 'descricao do perfil', now(), now(), null, true),
-('Mariazinha', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','mariazinha@email.com', 'descricao dela', now(), now(), null, true),
-('João', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','joao@email.com', 'joão do perfil', now(), now(), now(), false),
-('Aline', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','line@email.com', 'line linda', now(), now(), null, true)
+insert into tb_user (name, password, email, image, description, created_at, updated_at, inactivated_at, is_active) values 
+('Tiago', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','tiago@email.com', 'image-url', 'descricao do perfil', now(), now(), null, true),
+('Mariazinha', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','mariazinha@email.com', 'image-url', 'descricao dela', now(), now(), null, true),
+('João', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','joao@email.com', 'image-url', 'joão do perfil', now(), now(), now(), false),
+('Aline', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG','line@email.com', 'image-url', 'line linda', now(), now(), null, true)
 ;
 
-INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
+INSERT INTO tb_role (authority) VALUES ('ROLE_CLIENT');
 INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
 
 INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);

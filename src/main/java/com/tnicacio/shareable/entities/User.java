@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -37,6 +39,7 @@ public class User implements UserDetails, Serializable{
 	@Column(unique = true)
 	private String email;
 	
+	private String image;
 	private String password;
 	private String description;
 
@@ -70,11 +73,13 @@ public class User implements UserDetails, Serializable{
 	public User() {
 	}
 
-	public User(Long id, String name, String email, String password, String description, Instant createdAt,
+	public User(Long id, String name, String email, String image,
+			String password, String description, Instant createdAt,
 			Instant updatedAt, Instant inactivatedAt, Boolean isActive) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.image = image;
 		this.password = password;
 		this.description = description;
 		this.createdAt = createdAt;
@@ -107,6 +112,14 @@ public class User implements UserDetails, Serializable{
 		this.email = email;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -165,6 +178,16 @@ public class User implements UserDetails, Serializable{
 	
 	public Set<Role> getRoles() {
 		return roles;
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		createdAt = Instant.now();
+	}
+	
+	@PreUpdate
+	public void preUpdate() {
+		updatedAt = Instant.now();
 	}
 
 	@Override
